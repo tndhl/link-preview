@@ -1,12 +1,12 @@
 <?php
-namespace Dusterio\LinkPreview\Integrations;
+namespace Tndhl\LinkPreview\Integrations;
 
 use Illuminate\Support\ServiceProvider;
-use Dusterio\LinkPreview\Client;
+use Tndhl\LinkPreview\Client;
 
 /**
  * Class LaravelServiceProvider
- * @package Dusterio\LinkPreview\Integrations
+ * @package Tndhl\LinkPreview\Integrations
  * @codeCoverageIgnore
  */
 class LaravelServiceProvider extends ServiceProvider

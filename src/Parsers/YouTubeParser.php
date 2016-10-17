@@ -1,13 +1,13 @@
 <?php
 
-namespace Dusterio\LinkPreview\Parsers;
+namespace Tndhl\LinkPreview\Parsers;
 
-use Dusterio\LinkPreview\Contracts\LinkInterface;
-use Dusterio\LinkPreview\Contracts\ReaderInterface;
-use Dusterio\LinkPreview\Contracts\ParserInterface;
-use Dusterio\LinkPreview\Contracts\PreviewInterface;
-use Dusterio\LinkPreview\Models\VideoPreview;
-use Dusterio\LinkPreview\Readers\HttpReader;
+use Tndhl\LinkPreview\Contracts\LinkInterface;
+use Tndhl\LinkPreview\Contracts\ReaderInterface;
+use Tndhl\LinkPreview\Contracts\ParserInterface;
+use Tndhl\LinkPreview\Contracts\PreviewInterface;
+use Tndhl\LinkPreview\Models\VideoPreview;
+use Tndhl\LinkPreview\Readers\HttpReader;
 
 /**
  * Class YouTubeParser

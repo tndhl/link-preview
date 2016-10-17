@@ -1,10 +1,10 @@
 <?php
 
-namespace Dusterio\LinkPreview\Models;
+namespace Tndhl\LinkPreview\Models;
 
-use Dusterio\LinkPreview\Contracts\PreviewInterface;
-use Dusterio\LinkPreview\Traits\HasExportableFields;
-use Dusterio\LinkPreview\Traits\HasImportableFields;
+use Tndhl\LinkPreview\Contracts\PreviewInterface;
+use Tndhl\LinkPreview\Traits\HasExportableFields;
+use Tndhl\LinkPreview\Traits\HasImportableFields;
 
 class HtmlPreview implements PreviewInterface
 {

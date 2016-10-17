@@ -1,10 +1,10 @@
 <?php
 
-namespace Dusterio\LinkPreview\Parsers;
+namespace Tndhl\LinkPreview\Parsers;
 
-use Dusterio\LinkPreview\Contracts\LinkInterface;
-use Dusterio\LinkPreview\Contracts\ReaderInterface;
-use Dusterio\LinkPreview\Contracts\PreviewInterface;
+use Tndhl\LinkPreview\Contracts\LinkInterface;
+use Tndhl\LinkPreview\Contracts\ReaderInterface;
+use Tndhl\LinkPreview\Contracts\PreviewInterface;
 
 abstract class BaseParser
 {

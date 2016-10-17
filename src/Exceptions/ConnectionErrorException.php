@@ -1,10 +1,10 @@
 <?php
 
-namespace Dusterio\LinkPreview\Exceptions;
+namespace Tndhl\LinkPreview\Exceptions;
 
 /**
  * Class ConnectionErorException
- * @package Dusterio\LinkPreview\Exceptions
+ * @package Tndhl\LinkPreview\Exceptions
  */
 class ConnectionErrorException extends \Exception
 {

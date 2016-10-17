@@ -1,15 +1,14 @@
 {
-    "name": "dusterio/link-preview",
+    "name": "tndhl/link-preview",
     "type": "library",
     "description": "Link preview generation for PHP with Laravel support",
     "keywords": ["php","url","scraping","laravel","preview"],
-    "homepage": "http://github.com/dusterio/link-preview",
+    "homepage": "http://github.com/tndhl/link-preview",
     "license": "MIT",
     "authors": [
         {
-            "name": "Denis Mysenko",
-            "email": "denis@mysenko.com",
-            "homepage": "https://www.mysenko.com"
+            "name": "Alex Shelepov",
+            "email": "sasha.shelepov@gmail.com"
         }
     ],
     "require": {
@@ -25,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dusterio\\LinkPreview\\": "src/"
+            "Tndhl\\LinkPreview\\": "src/"
         }
     }
 }
