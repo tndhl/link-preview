@@ -185,7 +185,7 @@ class HtmlParser extends BaseParser implements ParserInterface
                 $style = $slide->getAttribute('style');
 
                 // Accept following format: background-image:url(...)
-                $expression = '/background-image\:.*?url\((.*)?\)/';
+                $expression = '/background-image\:.*?url\(\\\'?(.*)?\\\'?\)/';
                 preg_match($expression, $style, $matches);
 
                 if (isset($matches[1])) {
