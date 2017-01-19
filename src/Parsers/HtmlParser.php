@@ -95,12 +95,16 @@ class HtmlParser extends BaseParser implements ParserInterface
     {
         $link = $this->readLink($link);
 
-        if (!$link->isUp()) throw new ConnectionErrorException();
+        if (!$link->isUp()) {
+            throw new ConnectionErrorException();
+        }
 
         if ($link->isHtml()) {
             $this->getPreview()->update($this->parseHtml($link));
-        } else if ($link->isImage()) {
-            $this->getPreview()->update($this->parseImage($link));
+        } else {
+            if ($link->isImage()) {
+                $this->getPreview()->update($this->parseImage($link));
+            }
         }
 
         return $this;
@@ -133,8 +137,8 @@ class HtmlParser extends BaseParser implements ParserInterface
             $parser = new Crawler($link->getContent());
 
             // Parse all known tags
-            foreach($this->tags as $tag => $selectors) {
-                foreach($selectors as $selector) {
+            foreach ($this->tags as $tag => $selectors) {
+                foreach ($selectors as $selector) {
                     if ($parser->filter($selector['selector'])->count() > 0) {
                         if (isset($selector['attribute'])) {
                             ${$tag} = $parser->filter($selector['selector'])->first()->attr($selector['attribute']);
@@ -147,19 +151,46 @@ class HtmlParser extends BaseParser implements ParserInterface
                 }
 
                 // Default is empty string
-                if (!isset(${$tag})) ${$tag} = '';
+                if (!isset(${$tag})) {
+                    ${$tag} = '';
+                }
             }
 
             // Parse all images on this page
-            foreach($parser->filter('img') as $image) {
-                if (!$image->hasAttribute('src')) continue;
-                if (filter_var($image->getAttribute('src'), FILTER_VALIDATE_URL) === false) continue;
+            foreach ($parser->filter('img') as $image) {
+                /** @var \DOMElement $image */
+                if (!$image->hasAttribute('src')) {
+                    continue;
+                }
+
+                if (filter_var($image->getAttribute('src'), FILTER_VALIDATE_URL) === false) {
+                    continue;
+                }
 
                 // This is not bulletproof, actual image maybe bigger than tags
-                if ($image->hasAttribute('width') && $image->getAttribute('width') < $this->imageMinimumWidth) continue;
-                if ($image->hasAttribute('height') && $image->getAttribute('height') < $this->imageMinimumHeight) continue;
+                if ($image->hasAttribute('width') && $image->getAttribute('width') < $this->imageMinimumWidth) {
+                    continue;
+                }
+                if ($image->hasAttribute('height') && $image->getAttribute('height') < $this->imageMinimumHeight) {
+                    continue;
+                }
 
                 $images[] = $image->getAttribute('src');
+            }
+
+
+            // Div Images
+            foreach ($parser->filter('div[style]') as $slide) {
+                /** @var \DOMElement $slide */
+                $style = $slide->getAttribute('style');
+
+                // Accept following format: background-image:url(...)
+                $expression = '/background-image\:.*?url\((.*)?\)/';
+                preg_match($expression, $style, $matches);
+
+                if (isset($matches[1])) {
+                    $images[] = $matches[1];
+                }
             }
         } catch (\InvalidArgumentException $e) {
             // Ignore exceptions
@@ -167,7 +198,9 @@ class HtmlParser extends BaseParser implements ParserInterface
 
         $images = array_unique($images);
 
-        if (!isset($cover) && count($images)) $cover = $images[0];
+        if (!isset($cover) && count($images)) {
+            $cover = $images[0];
+        }
 
         return compact('cover', 'title', 'description', 'images');
     }
