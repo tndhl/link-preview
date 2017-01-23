@@ -198,6 +198,15 @@ class HtmlParser extends BaseParser implements ParserInterface
 
         $images = array_unique($images);
 
+        $url = sprintf('%s://%s', parse_url($link->getUrl(), PHP_URL_SCHEME), parse_url($link->getUrl(), PHP_URL_HOST));
+
+        /** @var string $image */
+        foreach ($images as &$image) {
+            if (substr($image, 0, 4) != 'http') {
+                $image = $url . $image;
+            }
+        }
+
         if (!isset($cover) && count($images)) {
             $cover = $images[0];
         }
