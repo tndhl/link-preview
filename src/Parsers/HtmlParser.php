@@ -189,7 +189,7 @@ class HtmlParser extends BaseParser implements ParserInterface
                 preg_match($expression, $style, $matches);
 
                 if (isset($matches[1])) {
-                    $images[] = $matches[1];
+                    $images[] = rtrim($matches[1], '\'');
                 }
             }
         } catch (\InvalidArgumentException $e) {
