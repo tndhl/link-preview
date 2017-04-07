@@ -195,16 +195,10 @@ class HtmlParser extends BaseParser implements ParserInterface
 
             if (empty($description)) {
                 if (preg_match('/http\:\/\/bigginscott\.com\.au/', $link->getUrl())) {
-                    $content = [];
-                    $tab = $parser->filter('section.tab-about');
+                    $tab = $parser->filter('tab-panel[label="About"]');
 
                     if ($tab) {
-                        /** @var \DOMElement $paragraph */
-                        foreach ($tab->filter('p') as $paragraph) {
-                            $content[] = $paragraph->textContent;
-                        }
-
-                        $description = implode('<br/>', $content);
+                        $description = nl2br(strip_tags($tab->html()));
                     }
                 }
             }
