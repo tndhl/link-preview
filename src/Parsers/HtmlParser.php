@@ -196,13 +196,16 @@ class HtmlParser extends BaseParser implements ParserInterface
             if (!isset($description)) {
                 if (preg_match('/http\:\/\/bigginscott\.com\.au/', $link->getUrl())) {
                     $content = [];
+                    $tab = $parser->filter('section.tab-about');
 
-                    /** @var \DOMElement $paragraph */
-                    foreach ($parser->filter('section.tab-about > section > p') as $paragraph) {
-                        $content[] = $paragraph->textContent;
+                    if ($tab) {
+                        /** @var \DOMElement $paragraph */
+                        foreach ($tab->filter('p') as $paragraph) {
+                            $content[] = $paragraph->textContent;
+                        }
+
+                        $description = implode('<br/>', $content);
                     }
-
-                    $description = implode('<br/>', $content);
                 }
             }
         } catch (\InvalidArgumentException $e) {
